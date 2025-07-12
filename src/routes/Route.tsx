@@ -6,6 +6,8 @@ import Layout from "@/layout/Layout";
 import Home from "@/pages/Home";
 import AddBooks from "@/pages/AddBooks";
 import ShowAllBooks from "@/pages/ShowAllBooks";
+import ShowDetails from "@/pages/ShowDetails";
+import BorrowedBooks from "@/pages/BorrowedBooks";
 
 
 const router = createBrowserRouter([
@@ -30,8 +32,12 @@ const router = createBrowserRouter([
   element: <ShowAllBooks />,
 },
 {
+path: "/details/:id",
+element: <ShowDetails />
+},
+{
   path: "/borrowed-books",
-  element: <div>Borrowed Books</div>
+  element: <BorrowedBooks></BorrowedBooks>
 },
 {
   path: "/login",

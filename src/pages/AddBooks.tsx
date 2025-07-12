@@ -31,9 +31,13 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { useNavigate } from "react-router";
+import { useGetBooksQuery } from "@/features/api/apiSlice";
 
 const AddBooks = () => {
   const [addBook, { isLoading, isSuccess, isError }] = useAddBookMutation();
+  const navigate = useNavigate();
+  const { refetch } = useGetBooksQuery(undefined);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -71,12 +75,13 @@ const AddBooks = () => {
         available: true,
         copies: 1,
       });
+      refetch();
+      navigate("/all-books");
     } catch (err) {
       console.error(err);
       alert("❌ Failed to add book.");
     }
   };
-
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white dark:bg-gray-900 shadow-md rounded-md mt-10">
@@ -110,10 +115,12 @@ const AddBooks = () => {
             onChange={handleChange}
             className="w-full p-2 border rounded-md"
           >
-            <option value="FICTION">FICTION</option>
-            <option value="NON_FICTION">NON_FICTION</option>
+            <option value="FICTION">Fiction</option>
+            <option value="NON_FICTION">Non-Fiction</option>
             <option value="SCIENCE">SCIENCE</option>
-            <option value="MYSTERY">MYSTERY</option>
+            <option value="HISTORY">HISTORY</option>
+            <option value="BIOGRAPHY">BIOGRAPHY</option>
+            <option value="FANTASY">FANTASY</option>
           </select>
         </div>
 
@@ -151,7 +158,9 @@ const AddBooks = () => {
         <Button type="submit" disabled={isLoading}>
           {isLoading ? "Submitting..." : "Add Book"}
         </Button>
-        {isSuccess && <p className="text-green-500 mt-2">Book added successfully!</p>}
+        {isSuccess && (
+          <p className="text-green-500 mt-2">Book added successfully!</p>
+        )}
         {isError && <p className="text-red-500 mt-2">Failed to add book.</p>}
       </form>
     </div>
