@@ -4,6 +4,7 @@ import {
   useDeleteBookMutation,
   useUpdateBookMutation,
   useBorrowBookMutation,
+  useBorrowSummaryQuery,
 } from "@/features/api/apiSlice";
 import {
   Dialog,
@@ -41,6 +42,8 @@ const ShowAllBooks = () => {
 
  const { data, isLoading, isError, error, refetch, isFetching } =
     useGetBooksQuery({ page, limit, filter });
+
+      const { refetch : refetchborrowdata } = useBorrowSummaryQuery();
 
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
@@ -155,6 +158,8 @@ const handleBorrowBooks = async (book: Book) => {
       title: 'Success!',
       text: `You borrowed "${book.title}" successfully.`,
     });
+    refetchborrowdata();
+    navigate("/borrowed-books");
 
   } catch (err) {
     console.error("Error borrowing book:", err);
