@@ -15,7 +15,7 @@ function BorrowedBooks() {
         <p>No borrowed books found.</p>
       ) : (
         <table className="min-w-full border rounded text-sm">
-          <thead className="bg-gray-100 text-left">
+          <thead className="bg-gray-100 text-left dark:bg-gray-700">
             <tr>
               <th className="px-4 py-2">Title</th>
               <th className="px-4 py-2">ISBN</th>

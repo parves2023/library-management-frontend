@@ -202,6 +202,8 @@ const handleBorrowBooks = async (book: Book) => {
     </select>
   </div>
 
+  {isFetching && <div className=" text-sm text-gray-500">Refreshing data...</div>}
+
   {/* Pagination Controls */}
   <div className="flex items-center gap-2">
     <button
@@ -209,7 +211,7 @@ const handleBorrowBooks = async (book: Book) => {
       onClick={() => setPage((p) => p - 1)}
       className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
     >
-      <ChevronLeft size={16} />
+      <ChevronLeft size={16} className='text-black'  />
     </button>
     <span className="font-semibold">
       Page {page} of {meta?.totalPages || 1}
@@ -219,12 +221,12 @@ const handleBorrowBooks = async (book: Book) => {
       onClick={() => setPage((p) => p + 1)}
       className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
     >
-      <ChevronRight size={16} />
+      <ChevronRight size={16} className='text-black' />
     </button>
   </div>
 </div>
 
-{isFetching && <div className="mt-4 text-sm text-gray-500">Refreshing data...</div>}
+
 
 
 
@@ -250,7 +252,7 @@ const handleBorrowBooks = async (book: Book) => {
           </thead>
           <tbody>
             {books.map((book) => (
-              <tr key={book._id} className="border-t hover:bg-gray-50">
+              <tr key={book._id} className="border-t hover:bg-gray-50 dark:hover:bg-gray-900">
                 <td className="px-4 py-2">{book.title}</td>
                 <td className="px-4 py-2">{book.description}</td>
                 <td className="px-4 py-2">{book.author}</td>
